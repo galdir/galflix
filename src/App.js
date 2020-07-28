@@ -1,12 +1,30 @@
 import React from 'react';
 import Menu from './components/Menu'
+import dadosIniciais from './data/dados_iniciais.json'
+import BannerMain from './components/BannerMain'
+import Carousel from './components/Carousel'
+import Footer from './components/Footer'
 
 
 function App() {
   return (
-    <div className="App">
+    <div style={{ background: "#141414" }}>
       <Menu />
-      <h1> RELOAD automagico</h1>
+      <BannerMain
+        videoTitle={dadosIniciais.categorias[2].videos[2].titulo}
+        url={dadosIniciais.categorias[2].videos[2].url}
+        videoDescription={" "}
+      />
+      <Carousel
+        ignoreFirstVideo
+        category={dadosIniciais.categorias[2]}
+      />
+      <Carousel
+        ignoreFirstVideo
+        category={dadosIniciais.categorias[1]}
+      />
+
+      <Footer />
     </div>
   );
 }
