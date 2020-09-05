@@ -1,44 +1,53 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import PageDefault from '../../../components/PageDefault'
 import { Link } from 'react-router-dom';
 
 
 function CadastroCategoria() {
-  const [categorias, setCategorias] = useState(['Teste']);
-  const [nomeDaCategoria, setNomeDaCategoria] = useState('Valor inicial');
-
   const valoresIniciais = {
     nome: '',
     descricao: '',
-    cor: '#000',
+    cor: '',
   }
-
+  
+  const [categorias, setCategorias] = useState([]);// teste é a primeira categoria  
   const [values, setValues] = useState(valoresIniciais);
 
+  function setValue(chave, valor){
+    setValues({
+      ...values, // pega tudo que ja tem dentro de values e incrementa com a proxima linha
+      [chave]: valor, // caso a chave nao exista no objeto ela sera criada por causa dos colchetes e o valor ser associado
+    })
+  }
+
+  function handleChange(infosDoEvento) {
+    setValue(
+      infosDoEvento.target.getAttribute('name'),
+      infosDoEvento.target.value
+      );
+  }
 
   return (
     <PageDefault>
-      <h1>Cadastro de Categoria:  {nomeDaCategoria}</h1>
+      <h1>Cadastro de Categoria:  {values.nome}</h1>
 
-      <form style={{background: nomeDaCategoria}} onSubmit={function handleSubmit(infosDoEvento) {
+      <form onSubmit={function handleSubmit(infosDoEvento) {
         infosDoEvento.preventDefault();
-        console.log('voce tentou enviar o form')
+        //console.log('voce tentou enviar o form')
         setCategorias([
           ...categorias,
-          nomeDaCategoria
-        ])
+          values
+        ]);
+        setValues(valoresIniciais);
       }}>
         <div>
           <label>
             Nome da Categoria:
           <input
               type="text"
-              value={nomeDaCategoria}
-              onChange={function funcaoHandlerQueOErroPediu(infosDoEvento) {
-                //console.log('[nomeDaCategoria]', nomeDaCategoria);
-                //console.log('[infosDoEvento.targe.value]', infosDoEvento.target.value);
-                setNomeDaCategoria(infosDoEvento.target.value)
-              }}
+              name="nome"
+              value={values.nome} // ou values['nome'] chamando objeto como array
+              onChange={handleChange}
             >
             </input>
           </label>
@@ -48,12 +57,9 @@ function CadastroCategoria() {
             Descrição:
           <textarea
               type="text"
-              value={nomeDaCategoria}
-              onChange={function funcaoHandlerQueOErroPediu(infosDoEvento) {
-                //console.log('[nomeDaCategoria]', nomeDaCategoria);
-                //console.log('[infosDoEvento.targe.value]', infosDoEvento.target.value);
-                setNomeDaCategoria(infosDoEvento.target.value)
-              }}
+              name="descricao"
+              value={values.descricao}
+              onChange={handleChange}
             />
 
           </label>
@@ -63,12 +69,9 @@ function CadastroCategoria() {
             Cor:
           <input
               type="color"
-              value={nomeDaCategoria}
-              onChange={function funcaoHandlerQueOErroPediu(infosDoEvento) {
-                //console.log('[nomeDaCategoria]', nomeDaCategoria);
-                //console.log('[infosDoEvento.targe.value]', infosDoEvento.target.value);
-                setNomeDaCategoria(infosDoEvento.target.value)
-              }}
+              name="cor"
+              value={values.color}
+              onChange={handleChange}
             />
 
           </label>
@@ -84,7 +87,7 @@ function CadastroCategoria() {
         {categorias.map((categoria, indice) => {
           return (
             <li key={`${categoria}${indice}`}>
-              {categoria}
+              {categoria.nome}
             </li>
           )
         })}
