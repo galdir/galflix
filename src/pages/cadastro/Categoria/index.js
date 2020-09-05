@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PageDefault from '../../../components/PageDefault'
 import { Link } from 'react-router-dom';
 import FormField from '../../../components/FormField';
@@ -10,11 +10,11 @@ function CadastroCategoria() {
     descricao: '',
     cor: '',
   }
-  
+
   const [categorias, setCategorias] = useState([]);// teste é a primeira categoria  
   const [values, setValues] = useState(valoresIniciais);
 
-  function setValue(chave, valor){
+  function setValue(chave, valor) {
     setValues({
       ...values, // pega tudo que ja tem dentro de values e incrementa com a proxima linha
       [chave]: valor, // caso a chave nao exista no objeto ela sera criada por causa dos colchetes e o valor ser associado
@@ -25,7 +25,7 @@ function CadastroCategoria() {
     setValue(
       infosDoEvento.target.getAttribute('name'),
       infosDoEvento.target.value
-      );
+    );
   }
 
   return (
@@ -43,13 +43,32 @@ function CadastroCategoria() {
       }}>
 
 
-        <FormField 
+        <FormField
+          label="Nome da categoria"
+          type="text"
+          name="nome"
           value={values.nome}
           onChange={handleChange}
         />
 
+        <FormField
+        label="Descrição"
+          type="textarea"
+          name="descricao"
+          value={values.descricao}
+          onChange={handleChange}
+        />
 
-        <div>
+        <FormField
+        label="Cor"
+          type="color"
+          name="cor"
+          value={values.cor}
+          onChange={handleChange}
+        />
+
+
+        {/* <div>
           <label>
             Descrição:
           <textarea
@@ -60,8 +79,8 @@ function CadastroCategoria() {
             />
 
           </label>
-        </div>
-        <div>
+        </div> */}
+        {/*        <div>
           <label>
             Cor:
           <input
@@ -72,7 +91,7 @@ function CadastroCategoria() {
             />
 
           </label>
-        </div>
+        </div> */}
 
         <button>
           Cadastrar

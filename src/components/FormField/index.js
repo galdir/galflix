@@ -1,13 +1,13 @@
 import React from "react";
 
-function FormField({value, onChange}) {
+function FormField({label,type, name, value, onChange}) {
     return (
         <div>
             <label>
-                Nome da Categoria:
+                {label} :
                 <input
-                    type="text"
-                    name="nome"
+                    type={type}
+                    name={name}
                     value={value} // ou values['nome'] chamando objeto como array
                     onChange={onChange}
                 />
