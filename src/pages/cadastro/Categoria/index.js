@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import PageDefault from '../../../components/PageDefault'
 import { Link } from 'react-router-dom';
+import FormField from '../../../components/FormField';
 
 
 function CadastroCategoria() {
@@ -40,18 +41,14 @@ function CadastroCategoria() {
         ]);
         setValues(valoresIniciais);
       }}>
-        <div>
-          <label>
-            Nome da Categoria:
-          <input
-              type="text"
-              name="nome"
-              value={values.nome} // ou values['nome'] chamando objeto como array
-              onChange={handleChange}
-            >
-            </input>
-          </label>
-        </div>
+
+
+        <FormField 
+          value={values.nome}
+          onChange={handleChange}
+        />
+
+
         <div>
           <label>
             Descrição:
